@@ -1,108 +1,136 @@
-# 💰 Ứng dụng Quản lý Chi Tiêu Cá Nhân
-
-
-
-
-
+# 💰 Personal Finance Management API
 
 ## 📑 Mục lục
 
-- [Giới thiệu](#-giới-thiệu)
-- [Tính năng](#-tính-năng)
+- [Tổng quan](#-tổng-quan)
+- [Tính năng chính](#-tính-năng-chính) 
 - [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
-- [Cài đặt](#-cài-đặt)
-- [Cấu trúc dự án](#-cấu-trúc-dự-án)
+- [Kiến trúc hệ thống](#-kiến-trúc-hệ-thống)
+- [Cài đặt và chạy](#-cài-đặt-và-chạy)
 - [API Documentation](#-api-documentation)
-- [Đóng góp](#-đóng-góp)
-- [Giấy phép](#-giấy-phép)
+- [Bảo mật](#-bảo-mật)
+- [Tác giả](#-tác-giả)
 
-## 🌟 Giới thiệu
+## 🌟 Tổng quan
 
-Ứng dụng Quản lý Chi Tiêu Cá Nhân là một Web API được xây dựng bằng .NET 8 giúp người dùng theo dõi và quản lý chi tiêu của họ một cách hiệu quả. Ứng dụng cung cấp các tính năng như theo dõi thu chi, phân loại chi tiêu, thiết lập ngân sách và báo cáo thống kê.
+Personal Finance Management API là một RESTful Web API được xây dựng bằng ASP.NET Core 8 giúp người dùng theo dõi và quản lý tài chính cá nhân một cách hiệu quả. Dự án này được thiết kế với kiến trúc clean, có khả năng mở rộng và tập trung vào hiệu suất cũng như bảo mật.
 
-## ✨ Tính năng
+## ✨ Tính năng chính
 
-- **👤 Quản lý người dùng**
+### 👤 Quản lý người dùng
+- Đăng ký tài khoản với xác thực email
+- Xác thực JWT với Refresh Token
+- Rate limiting cho API đăng nhập
+- Quản lý thông tin cá nhân
 
-  - Đăng ký và xác thực email
-  - Đăng nhập với JWT
-  - Quản lý thông tin cá nhân
+### 💳 Quản lý giao dịch
+- CRUD các khoản thu chi
+- Phân loại giao dịch theo danh mục
+- Ghi chú chi tiết cho mỗi giao dịch
+- Lọc và tìm kiếm giao dịch
 
-- **📉 Quản lý giao dịch**
-
-  - Thêm/sửa/xóa các khoản thu chi
-  - Phân loại giao dịch
-  - Ghi chú chi tiết
-
-- **📊 Quản lý ngân sách**
-
-  - Thiết lập ngân sách theo danh mục
-  - Cảnh báo vượt ngân sách
-  - Theo dõi chi tiêu thực tế
+### 📊 Quản lý ngân sách
+- Thiết lập ngân sách theo danh mục
+- Theo dõi và cảnh báo vượt ngân sách
+- Báo cáo chi tiêu theo thời gian
+- Thống kê 
 
 ## 🛠 Công nghệ sử dụng
 
-- **Backend**
+### Backend
+- ASP.NET Core 8.0
+- Entity Framework Core 8.0
+- SQL Server
+- AutoMapper
+- Identity Framework
 
-  - ASP.NET Core 8.0
-  - Entity Framework Core
-  - SQL Server
-  - AutoMapper
-  - JWT Authentication
+### Bảo mật & Xác thực
+- JWT Authentication
+- Refresh Token
+- Rate Limiting
+- Email Verification
 
-- **Tools & Libraries**
+### Development Tools
+- Swagger/OpenAPI
+- Docker
+- Git
+- Visual Studio 2022
 
-  - Swagger/OpenAPI
-  - Identity Framework
-  - Email Service (SMTP)
+## 🏗 Kiến trúc hệ thống
 
-## 💻 Cài đặt
-
-1. **Yêu cầu hệ thống**
-
-   ```bash
-   .NET 8.0 SDK
-   SQL Server
-   Visual Studio 2022 hoặc VS Code
-   ```
-
-2. **Clone dự án**
-
-   ```bash
-   git clone https://github.com/your-username/QuanLyChiTieuCaNhan.git
-
-   cd QuanLyChiTieuCaNhan
-   ```
-
-3. **Cấu hình database**
-
-   - Cập nhật connection string trong `appsettings.json`
-   - Chạy migration:
-     ```bash
-     dotnet ef database update
-     ```
-
-4. **Chạy ứng dụng**
-
-   ```bash
-   dotnet run
-   ```
-
-## 🗋 Cấu trúc dự án
+Dự án được xây dựng theo mô hình Repository Pattern với các layer:
 
 ```plaintext
-QuanLyChiTieuCaNhan/
-├── Controllers/       # API Controllers
-├── Models/            # Entity models
-├── DTOs/              # Data Transfer Objects
-├── Services/          # Business logic
-├── Repository/        # Data access layer
-├── Middleware/        # Custom middleware
-├── Mapper/            # AutoMapper profiles
-└── CustomExceptions/  # Custom exception handlers
+src/
+├── Controllers/     # API Endpoints
+├── Services/        # Business Logic
+├── Repository/      # Data Access
+├── Models/          # Domain Models
+├── DTOs/            # Data Transfer Objects
+├── Middleware/      # Custom Middleware
+└── Configurations/  # App Settings
+```
+
+## 💻 Cài đặt và chạy
+
+### Yêu cầu hệ thống
+- .NET 8.0 SDK
+- SQL Server 2019+
+- Visual Studio 2022 hoặc VS Code
+
+### Các bước cài đặt
+
+1. Clone dự án:
+```bash
+git clone https://github.com/dung4822/QuanLyChiTieuCaNhan.git
+cd QuanLyChiTieuCaNhan
+```
+
+2. Cấu hình database trong `appsettings.json`:
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "your_connection_string"
+  }
+}
+```
+
+3. Chạy migration:
+```bash
+dotnet ef database update
+```
+
+4. Khởi chạy ứng dụng:
+```bash
+dotnet run
+```
+
+### Docker
+```bash
+docker build -t personal-finance-api .
+docker run -p 8080:80 personal-finance-api
 ```
 
 ## 📚 API Documentation
 
-Swagger UI: [https://localhost:7125/swagger](https://localhost:7125/swagger)
+API được tài liệu hóa đầy đủ với Swagger UI:
+- Development: https://localhost:7125/swagger
+- Production: https://api.example.com/swagger
+
+## 🔐 Bảo mật
+
+- JWT Authentication với refresh token
+- Rate limiting cho API authentication
+- Mã hóa mật khẩu với Identity Framework
+- Xác thực email người dùng
+- HTTPS và SSL
+- Cross-Origin Resource Sharing (CORS)
+
+## 👨‍💻 Tác giả
+
+**Nguyễn Đức Dũng**
+- GitHub: [@yourgithub](https://github.com/dung4822)
+
+---
+© 2024 Personal Finance Management API. All rights reserved.
 
